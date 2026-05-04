@@ -2,8 +2,9 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SOS Zkouška — Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0d0f14">
+<title>SOS Zkouška — Test Mobile</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -420,11 +421,150 @@
 
   .finish-btn:hover { opacity: 0.88; transform: translateY(-2px); }
 
-  @media (max-width: 600px) {
-    .header { padding: 20px 16px; }
-    .main { padding: 24px 12px 80px; }
-    .question-card { padding: 20px 16px; }
-    .result-box { padding: 32px 24px; }
+  @media (max-width: 760px) {
+    body {
+      padding-bottom: calc(82px + env(safe-area-inset-bottom));
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .header {
+      padding: 16px 14px 14px;
+      position: sticky;
+      top: 0;
+    }
+
+    .header-inner {
+      display: block;
+      max-width: none;
+    }
+
+    .header-title {
+      font-size: 10px;
+      margin-bottom: 3px;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .progress-wrap {
+      align-items: stretch;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .progress-label {
+      font-size: 10px;
+      text-align: left;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 5px;
+    }
+
+    .main {
+      padding: 18px 10px 26px;
+      max-width: none;
+    }
+
+    .question-card {
+      border-radius: 14px;
+      padding: 18px 14px;
+      margin-bottom: 14px;
+    }
+
+    .question-number {
+      font-size: 10px;
+      margin-bottom: 10px;
+    }
+
+    .question-text {
+      font-size: 15px;
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .options {
+      gap: 9px;
+    }
+
+    .option {
+      min-height: 48px;
+      padding: 13px 12px;
+      gap: 10px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.45;
+      touch-action: manipulation;
+    }
+
+    .option-letter {
+      min-width: 22px;
+      font-size: 11px;
+    }
+
+    .score-bar {
+      padding: 9px 10px calc(9px + env(safe-area-inset-bottom));
+      justify-content: space-around;
+      gap: 0;
+    }
+
+    .score-divider { display: none; }
+
+    .score-val { font-size: 18px; }
+    .score-lbl { font-size: 9px; }
+
+    .finish-btn-wrap {
+      padding: 18px 0 8px;
+    }
+
+    .finish-btn,
+    .result-btn {
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 14px;
+    }
+
+    .result-overlay {
+      padding: 14px;
+    }
+
+    .result-box {
+      width: 100%;
+      padding: 30px 20px;
+      border-radius: 20px;
+    }
+
+    .result-emoji {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .result-score {
+      font-size: 56px;
+    }
+
+    .result-breakdown {
+      gap: 34px;
+      margin-bottom: 28px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .question-text { font-size: 14px; }
+    .option { font-size: 13px; padding: 12px 10px; }
+    .header h1 { font-size: 17px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 </style>
 </head>
@@ -477,8 +617,1078 @@
 </div>
 
 <script>
-// Quiz data and logic intentionally kept as provided.
-const questions = [];
+const questions = [
+  {
+    "q": "Pro porty na transportní vrstvě protokolového modelu TCP/IP platí, že:",
+    "options": [
+      "Porty v rozsahu 49152-65535 se používají na straně serveru. Tyto porty jsou staticky přiděleny konkrétním službám.",
+      "Porty v rozsahu 0-1023 se používají v OS UNIX a Linux. Porty v rozsahu 49152-65535 se používají v jiných operačních systémech.",
+      "Porty v rozsahu 0-1023 se používají na straně klienta. Číslo portu odpovídá PID procesu.",
+      "Porty v rozsahu 0-1023 se používají na straně serveru. Tyto porty jsou staticky přiděleny konkrétním službám."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Dávkový systém (způsob plánování běhu procesů):",
+    "options": [
+      "Používají se tam, kde je potřeba zajistit interaktivitu pro uživatele systému.",
+      "Používá se ve výkonných informačních centrech.",
+      "Používají se tam, kde je potřeba zajistit předvídatelnost zpracování úloh.",
+      "Používá se při řízení časově kritických činností."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Segmentace jako způsob správy paměti operačního systému zahrnuje:",
+    "options": [
+      "Rozdělení paměťového obrazu procesů na úseky pevné velikosti.",
+      "Rozdělení paměťového obrazu procesů na logicky související části.",
+      "Rozdělení paměťového obrazu procesů na úseky o velikostech násobků čísla 4.",
+      "Rozdělení paměťového obrazu procesů na úseky o velikostech násobků čísla 2."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Proces je ve stavu „uspán a odložen\". Jakými stavy projde, aby mohl být spuštěn? (devítistavový model)",
+    "options": [
+      "Je načten do hlavní paměti, přechází do stavu „spící v hlavní paměti\", poté je probuzen, přechází do stavu „živá mrtvola\". Pak počká až jej vybere plánovač jádra.",
+      "Po určitém časovém intervalu přechází do stavu „živá mrtvola\" a pak přímo do stavu „běžící v uživatelském režimu\".",
+      "Je probuzen, přejde do stavu „připravený ke zpracování, ale odložený\", pak je načten do hlavní paměti, přechází do stavu „připravený ke zpracování v hlavní paměti\", poté počká až jej vybere plánovač jádra.",
+      "Počká až jej vybere plánovač pro běh v režimu jádra, žádnými dalšími stavy neprochází."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Konfigurační soubory se podle standardu FHS (Filesystem Standard) nachází v adresáři:",
+    "options": [
+      "/cfg",
+      "/sys",
+      "/etc",
+      "/proc"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Kde je umístěn operační systém ve vztahu k dalším částem výpočetního prostředku?",
+    "options": [
+      "Na stejné úrovni jako vrstva strojového jazyka.",
+      "Na stejné úrovni jako aplikační programy.",
+      "Na stejné úrovni jako vrstva mikroarchitekury.",
+      "Pod úrovní aplikačních programů, navazuje na hardware přes mikroarchitekturu."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Služba SSH používá šifrování pomocí veřejného a tajného klíče. Vyberte správné tvrzení:",
+    "options": [
+      "Šifrování dat se provede tajným klíčem a dešifrování veřejným klíčem.",
+      "Šifrování dat se provede veřejným klíčem a dešifrování tajným klíčem.",
+      "V případě šifrování tajným klíčem lze data přečíst i bez dešifrování pokud je uživatel root.",
+      "V případě šifrování veřejným klíčem lze data přečíst i bez dešifrování pokud je uživatel root."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Uvažte základní podmínky synchronizace procesů. Kdy je možné blokovat proces před vstupem do kritické sekce?",
+    "options": [
+      "Pokud je již jiný proces v kritické sekci.",
+      "Pokud NENÍ jakýkoliv proces uživatele administrátor ve své kritické sekci.",
+      "Pokud NENÍ proces, který tvoří vrchol hierarchie procesů, ve své kritické sekci.",
+      "Pokud NENÍ žádný proces ve své kritické sekci."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Mezi přidané moduly modulárního jádra standardně patří:",
+    "options": [
+      "Ovladače zařízení a souborových systémů.",
+      "Software zajišťující multitasking.",
+      "Správce procesů.",
+      "Software zajišťující virtuální paměť."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "O modulárním monolitickém jádru operačního systému platí, že:",
+    "options": [
+      "Moduly monolitickému jádru poskytují možnost transformace do jiného typu jádra za běhu.",
+      "Obsahuje pouze základní části; další části v podobě modulů jsou dynamicky načítány v případě potřeby.",
+      "Načítání modulů může probíhat pouze při startu operačního systému.",
+      "Použité moduly pracují jako procesy v uživatelském režimu."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Jádro operačního systému je:",
+    "options": [
+      "Potřeba pouze pro zápis a čtení dat z paměťového média.",
+      "Aktivní jenom při startu operačního systému.",
+      "Aktivní jenom po dobu síťové komunikace.",
+      "Stále aktivní a pracuje přímo s hardware počítače. Prostřednictvím systémových volání poskytuje služby systémových programů."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Když proces za běhu dynamicky alokuje více datového prostoru, je použita jeho část uživatelského kontextu nazvaná:",
+    "options": [
+      "Data jádra.",
+      "Halda (heap).",
+      "Zásobník (stack).",
+      "Textová."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Ve vzorci „priorita = využitíCPU/2 + nice + báze\" hodnota „nice\" značí:",
+    "options": [
+      "Modifikovatelný parametr, pomocí kterého může uživatel/administrátor ovlivňovat hodnotu priority zvoleného procesu.",
+      "Relativní priority události napevno zakompilovány v systému.",
+      "Hodnotu, pomocí které je automaticky ovlivňována priorita na základě velikosti zabrané paměti.",
+      "Průměr počtu taktů za sekundu, které proces spotřeboval za uplynulých několik sekund."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Celočíselný identifikátor procesu (PID) je typicky přidělován podle následujícího pravidla:",
+    "options": [
+      "PID je odvozeno od ID uživatele, který proces spustil.",
+      "Přiděluje se při vytváření procesu.",
+      "Přiděluje se podle funkce procesu, více procesů může mít stejné PID.",
+      "Přiděluje se podle funkce procesu, každý proces musí mít jedinečné PID."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Pro ukládání dat souborů v souborovém systému se typicky využívá jaká strategie?",
+    "options": [
+      "Data souboru jsou uložena v datových blocích, které NEMUSÍ být na paměťovém médiu uloženy za sebou.",
+      "Data souboru jsou uložena vždy v jednom datovém bloku na paměťovém médiu.",
+      "Data souboru jsou uložena v datových blocích, které musí být vždy uloženy za sebou.",
+      "Data souboru jsou uložena vždy v jednom datovém bloku. Jednotlivé bajty se pravidelně defragmentují."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Co je to „vzájemné vyloučení\" v terminologii synchronizace procesů?",
+    "options": [
+      "Zajištění výhradního přístupu ke sdíleným prostředkům pro jeden proces.",
+      "Blokování procesu, který je ve stavu uvíznutí.",
+      "Zajištění výhradního přístupu k síti pro jeden proces.",
+      "Blokování procesu, který se nachází ve své kritické sekci."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Co je pravda o zásobníku jako části uživatelského kontextu procesu?",
+    "options": [
+      "Zásobník se používá pouze pro procesy, které běží v režimu jádra.",
+      "Zásobník má pevnou velikost, jeho velikost NELZE za běhu procesu měnit.",
+      "Zásobník se používá dynamicky. Za běhu se plní parametry volaných funkcí.",
+      "Zásobník se používá pouze pro systémové procesy."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Podle standardu FHS se v adresáři /root nachází:",
+    "options": [
+      "Konfigurační soubory všech programů vlastněných uživatelem root.",
+      "Programy, které uživatel root standardně potřebuje pro správu systému.",
+      "Domovský adresář uživatele root.",
+      "Kořenový adresář."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "O modelu klient-server jako přístupu ke stavbě operačního systému platí:",
+    "options": [
+      "Jádro zprostředkovává komunikaci mezi klienty a servery běžícími v uživatelském režimu.",
+      "Žádost o službu jádra představuje vyslání požadavku procesem server (v uživatelském režimu) procesu klient (v režimu jádra).",
+      "Jádro vyžaduje složitou implementaci pro distribuované systémy, proto se pro ně NEHODÍ.",
+      "Komunikace klienta (v jádře) se serverem (mimo jádro) probíhá pomocí speciálního hardware."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Jaký je problém metody vstupu do kritické sekce pomocí sdílené dvouhodnotové proměnné?",
+    "options": [
+      "Lze ji použít pouze v operačním systému Linux.",
+      "Lze ji použít pouze v programovacím jazyce asembler.",
+      "NEZARUČUJE 100% vyloučení souběhu procesů.",
+      "Lze ji použít pouze v operačních systémech s monolitickým jádrem."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Co se stane při vzájemném vyloučení, pokud chtějí dva procesy vstoupit do své kritické sekce?",
+    "options": [
+      "Vždy je umožněn okamžitý vstup procesu s vyšší prioritou.",
+      "Oba procesy si vygenerují náhodné číslo. Proces s vyšším číslem vstoupí.",
+      "První proces do ní vstoupí a druhý je blokován/čeká.",
+      "První proces do ní vstoupí a druhý musí svou kritickou sekci přeskočit."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Lze se vzdáleně přihlásit pomocí služby SSH bez nutnosti zadávat heslo?",
+    "options": [
+      "Ano, pomocí použití tajného a veřejného klíče.",
+      "Ano, pouze pokud má uživatel heslo stejné na klientské i serverové stanici.",
+      "Ano, pouze za podmínky jestliže má uživatel zadáno prázdné heslo.",
+      "Ne, při jakémkoliv druhu vzdáleného přihlášení je nutné použít heslo."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Pojmem mikrojádro operačního systému označujeme:",
+    "options": [
+      "Pouze jádro 8bitových mikropočítačů.",
+      "Obecně jádro, kde je pouze nezbytné minimum — správa paměti, multitasking, přerušení, jednoduchá komunikace mezi procesy.",
+      "Pouze jádro 8bytových mikropočítačů.",
+      "Pouze jádra operačních systémů na hardwarové platformě Microtic."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Operační systém Linux je tvořen:",
+    "options": [
+      "Volně šiřitelným jádrem s dostupnými zdrojovými kódy. K jádru NENÍ nutné přidat další programy.",
+      "Jádrem, ke kterému NEJSOU dostupné zdrojové kódy. K jádru NENÍ nutné přidat další programy.",
+      "Jádrem typu klient-server, které je převzat z OS Windows. K jádru jsou přidány další programy.",
+      "Volně šiřitelným jádrem s dostupnými zdrojovými kódy. K jádru jsou přidány další programy. Spolu pak tvoří operační systém."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Pro typické sestavení spojení mezi dvěma stanicemi pomocí protokolu TCP je zapotřebí:",
+    "options": [
+      "2 segmentů: žádost o navázání obousměrného spojení (SYN), potvrzení (ACK).",
+      "4 segmentů: SYN, ACK, SYN, ACK.",
+      "2 segmentů: SYN, SYN.",
+      "3 segmentů: SYN, SYN+ACK, ACK."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Část uživatelského kontextu procesu, která obsahuje strojové instrukce vykonávané procesorem, se nazývá:",
+    "options": [
+      "Halda (heap).",
+      "Zásobník (stack).",
+      "Datová část (data segment).",
+      "Textová část (text segment)."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Pro trvání výpočetních intervalů procesů (práce CPU) lze říci:",
+    "options": [
+      "Trvání výpočetního intervalu procesu lze odvodit jako druhou odmocninu z hodnoty PID.",
+      "Je typicky více procesů s dlouhými intervaly výpočtů a méně procesů s krátkými intervaly.",
+      "Trvání výpočetního intervalu procesu lze odvodit jako čtvrtou odmocninu z hodnoty PID.",
+      "Je typicky více procesů s krátkými intervaly výpočtů a méně procesů s dlouhými intervaly."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Proměnlivá data (například data webového serveru) se podle standardu FHS nachází v adresáři:",
+    "options": [
+      "/var",
+      "/lib",
+      "/usr",
+      "/bin"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Jakou funkci plní v referenčním modelu OSI síťová vrstva?",
+    "options": [
+      "Synchronizaci portů na straně serveru a na straně klienta.",
+      "Směruje tok dat organizovaných do paketů a provádí směrování.",
+      "Koordinuje kódování a syntax vyměňovaných dat.",
+      "Zpřístupňuje prostředí modelu OSI komunikujícím systémům."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Řídící tabulka procesů PCB (Process Control Block) obsahuje informace pro:",
+    "options": [
+      "Všechny procesy, které běžely v minulosti.",
+      "Všechny běžící procesy.",
+      "Všechny neběžící procesy, u kterých se předpokládá, že budou spuštěny v budoucnosti.",
+      "Jen pro procesy alespoň z části umístěné v odkládací paměti."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Co je „kritická sekce\" v terminologii synchronizace procesů?",
+    "options": [
+      "Část programového kódu procesu, ve které se přistupuje ke sdíleným prostředkům.",
+      "Část programového kódu, jehož vykonávání trvá déle a bude proto pravděpodobně pozastaveno.",
+      "Závěrečná část života každého procesu.",
+      "Část paměti do které má přístup pouze proces jádra."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Při zaslání segmentu s příznakem FIN ze strany serveru dojde:",
+    "options": [
+      "K ukončení jednosměrného spojení TCP. Server může dále posílat data.",
+      "K ukončení celého obousměrného spojení TCP. Žádná strana již nemůže posílat data.",
+      "K ukončení jednosměrného spojení TCP. Klient může dále posílat data, dokud sám neukončí druhé spojení segmentem FIN.",
+      "K restartu spojení UDP, protože server detekoval chybu."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Co provádí metoda stránkování jako druh správy paměti operačního systému?",
+    "options": [
+      "Maximalizuje počet výpadků stránek — udržuje vždy nejméně 75% hlavní paměti volné.",
+      "Rozdělí paměťový obraz procesů na stejně velké části a přenáší je do rámce v hlavní paměti.",
+      "Rozdělí paměťový obraz procesů na různě velké části, přenáší je do hlavní paměti po defragmentaci.",
+      "Maximalizuje počet výpadků stránek — udržuje vždy alespoň polovinu hlavní paměti volnou."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Minimálně které vrstvy referenčního modelu OSI musí mít implementován směrovač (router)?",
+    "options": [
+      "Fyzickou, linkovou/spojovou a síťovou.",
+      "Fyzickou a linkovou/spojovou.",
+      "Pouze síťovou.",
+      "Všechny."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Nový proces po vytvoření může přejít přímo do jednoho ze dvou stavů. Které dva stavy to jsou?",
+    "options": [
+      "„spící v hlavní paměti\" a „spící, odložený ve vedlejší paměti\".",
+      "„připravený ke zpracování, ale odložený\" a „připravený ke zpracování v hlavní paměti\".",
+      "„vykonávaný v režimu jádra\" a „živá mrtvola\" (zombie).",
+      "„vykonávaný v uživatelském režimu\" a „vykonávaný v režimu jádra\"."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Podle standardu FHS se v adresáři /opt nachází:",
+    "options": [
+      "Konfigurace protokolu Open Protocol Transfer (svobodná licence).",
+      "Konfigurace protokolu Open Protocol Transfer (nezáleží na licenci).",
+      "Optimalizované programy pouze pro uživatele root.",
+      "Přídavné programové balíky."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "U kterého typu systému je nejdůležitějším kritériem dodržení termínu?",
+    "options": [
+      "Pouze dávkový.",
+      "Real-time.",
+      "Pouze interaktivní.",
+      "Dávkový i interaktivní."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Seřaďte vrstvy referenčního modelu OSI od nejnižší k nejvyšší:",
+    "options": [
+      "Fyzická, síťová, linková/spojová, transportní, relační, prezentační, aplikační.",
+      "Fyzická, transportní, síťová, relační, linková/spojová, prezentační, aplikační.",
+      "Fyzická, linková/spojová, transportní, prezentační, relační, aplikační, síťová.",
+      "Fyzická, linková/spojová, síťová, transportní, relační, prezentační, aplikační."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Datové jednotky na transportní vrstvě protokolového modelu TCP/IP se nazývají:",
+    "options": [
+      "Pakety.",
+      "Bity.",
+      "Segmenty/datagramy.",
+      "Rámce."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Co značí pojem interní fragmentace při správě paměti?",
+    "options": [
+      "Celkový volný NESOUVISLY prostor v operační paměti.",
+      "Obsazený prostor v rámci první stránky alokovaného bloku.",
+      "Volný prostor v rámci poslední stránky alokovaného bloku.",
+      "Celkový volný souvislý prostor v operační paměti."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Jaká je hlavní výhoda paketového firewallu?",
+    "options": [
+      "Vysoká rychlost zpracování dat daná jeho jednoduchostí.",
+      "Možnost filtrování nevhodného obsahu přenášených dat.",
+      "Možnost provozu v transparentním a netransparentním režimu.",
+      "Schopnost rozlišit segmenty, které zahajují nový přenos."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Část uživatelského kontextu procesu, která obsahuje parametry volaných funkcí, se nazývá:",
+    "options": [
+      "Halda (heap).",
+      "Zásobník (stack).",
+      "Data jádra.",
+      "Textová část (programový kód)."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Co je příčinou souběhu (race condition) při synchronizaci procesů?",
+    "options": [
+      "Stejná rychlost vykonávání instrukcí pro všechny úlohy v systému.",
+      "Problém při sdílení prostředků mezi procesy.",
+      "Spouštění více procesů jedním uživatelem.",
+      "Spouštění více procesů ve stejném okamžiku."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Minimálně které vrstvy OSI musí mít implementována klasická serverová stanice (webový/emailový server)?",
+    "options": [
+      "Fyzickou, linkovou/spojovou a síťovou.",
+      "Pouze transportní.",
+      "Všechny.",
+      "Fyzickou a linkovou/spojovou."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Co vyjadřuje číslo procesu PID (Process IDentifier)?",
+    "options": [
+      "Počet stránek, ze kterých se skládá paměťový obraz procesu.",
+      "Jednoznačné identifikační číslo procesu.",
+      "První adresu v paměti právě probíhajícího procesu.",
+      "Velikost paměti rezervovanou pro proces."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Existuje-li logický a fyzický adresní prostor, pak používáme systém:",
+    "options": [
+      "Šifrování paměti — fyzický adresní prostor je šifrován.",
+      "Autentizace paměti — probíhá autentizace procesů pro přístup do fyzického adresního prostoru.",
+      "Virtuální paměti — logický a fyzický adresní prostor NEJSOU stejné.",
+      "Komprese paměti — logický adresní prostor je komprimován."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Rámec (frame) je jednotkou bloku dat které vrstvy referenčního modelu OSI?",
+    "options": [
+      "Síťové.",
+      "Fyzické.",
+      "Linkové/spojové.",
+      "Transportní."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Mezi hlavní účely služby SSH (Secure Socket Shell) NEpatří:",
+    "options": [
+      "Zajištění autentizace.",
+      "Zajištění komprese dat.",
+      "Zajištění integrity dat.",
+      "Zajištění šifrování dat."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Uvažme tři procesy: první je ve stavu čekající v hlavní paměti s PID=10, druhý je ve stavu vykonávaný s PID=25 a u třetího s PID=55 nastal výpadek stránky při jeho předešlém vykonávání. Který proces bude vykonáván v následujícím intervalu při preemptivním plánování?",
+    "options": [
+      "Nelze s jistotou určit.",
+      "Proces s PID=10.",
+      "Proces s PID=35.",
+      "Proces s PID=25."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Jak závisí rychlost práce s diskem na velikosti datových bloků souborového systému?",
+    "options": [
+      "Přenosová rychlost čtení roste s velikostí datových bloků. Přenosová rychlost zápisu klesá s velikostí datových bloků.",
+      "Přenosová rychlost zápisu roste s velikostí datových bloků. Přenosová rychlost čtení klesá s velikostí datových bloků.",
+      "Přenosová rychlost čtení/zápisu roste s velikostí datových bloků.",
+      "Přenosová rychlost čtení/zápisu klesá s velikostí datových bloků."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Vyberte nejlepší způsob blokování procesu před vstupem do kritické sekce při synchronizaci procesů.",
+    "options": [
+      "Ukončení procesu a jeho nové spuštění, až je vstup do kritické sekce umožněn.",
+      "Aktivní čekání ve smyčce.",
+      "Přechod do režimu spánku a čekání na signál probuzení.",
+      "Uvedení dvou a více procesů do stavu uvíznutí."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Vyberte správný postup pro zahájení spojení v aktivním režimu FTP:",
+    "options": [
+      "Klient naváže spojení pro přenos příkazů se serverem na portu 21; zvolí další port a odešle jeho číslo serveru. Server následně otevře spojení pro přenos dat s cílovým portem, který mu zaslal klient.",
+      "Klient naváže spojení pro přenos dat i příkazů paralelně.",
+      "Klient naváže spojení pro přenos příkazů se serverem na portu 21; zvolí další port a odešle jeho číslo serveru. Server toto číslo portu využije jako svůj zdrojový port a naváže spojení s klientem pro přenos dat.",
+      "Klient naváže spojení pro přenos dat i příkazů sériově."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "O virtuálních strojích jako možné realizaci operačního systému platí následující:",
+    "options": [
+      "Vycházejí z vrstvového přístupu ke stavbě operačního systému.",
+      "Vycházejí z hybridního jádra operačního systému. Hybridní jádro se mění podle požadavků daného virtuálního stroje.",
+      "Staví na modulárním monolitickém jádře operačního systému. Pomocí různých modulů jsou pak realizovány dílčí virtuální stroje.",
+      "Staví na principu, že pro každý virtuální stroj je k dispozici jeden fyzický procesor."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Co je principem „vzájemného vyloučení“ ve víceúlohovém systému při synchronizaci procesů?",
+    "options": [
+      "Zabránění dvěma a více procesům vstoupit současně do své kritické sekce, která ovládá práci se společnými prostředky.",
+      "Zabránění dvěma a více procesům vstoupit současně do své kritické sekce, která zajišťuje spolupráci s plánovačem pro výpočet priority zúčastněných procesů.",
+      "Zabránění běhu dvou a více procesů současně.",
+      "Zajištění si procesorového času na úkor jiného procesu pomocí změny priorit."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Co dělá ze souběhu (race condition) při synchronizaci procesů komplikovaný problém?",
+    "options": [
+      "Nízká režie jeho detekce.",
+      "Neidentifikovatelnost zainteresovaných procesů.",
+      "Neidentifikovatelnost paměťových oblastí zúčastněných procesů.",
+      "Náhodný výskyt jevu a často nízká pravděpodobnost výskytu."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Podle standardu FHS níže uvedené názvy adresářů v primární struktuře odpovídají tomuto využití: spustitelné soubory pro základní práci, konfigurační soubory, speciální soubory zařízení a dynamická/proměnlivá data. Vyberte správné pořadí:",
+    "options": [
+      "/bin, /cfg, /dev, /run",
+      "/sbin, /ete, /hw, /run",
+      "/bin, /etc, /dev, /var",
+      "/sbin, /cfg, /dev, /dnm"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Systém priorit v operačních systémech UNIX lze popsat následovně:",
+    "options": [
+      "Procesy běžící v uživatelském režimu mají kladné hodnoty. Procesy běžící v režimu jádra mají záporné hodnoty. Negativní hodnoty mají vyšší prioritu.",
+      "Procesy běžící v uživatelském režimu mají kladné hodnoty. Procesy běžící v režimu jádra mají záporné hodnoty. Kladné hodnoty mají vyšší prioritu.",
+      "Procesy běžící v uživatelském režimu mají záporné hodnoty. Procesy běžící v režimu jádra mají kladné hodnoty. Negativní hodnoty mají vyšší prioritu.",
+      "Procesy běžící v uživatelském režimu mají záporné hodnoty. Procesy běžící v režimu jádra mají kladné hodnoty. Pozitivní hodnoty mají vyšší prioritu."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Vyberte správný popis výpadku stránky (page fault) v konceptu virtuální paměti:",
+    "options": [
+      "Jedná se o chybu čtení stránky z hlavní paměti, typicky je způsobena vadným paměťovým modulem.",
+      "Jedná se o chybu čtení stránky z vedlejší/odkládací paměti, typicky je způsobena vadným sektorem na disku.",
+      "Jedná se o událost, kdy se proces pokouší přistoupit na adresu spadající do stránky, ke které nemá povolený přístup.",
+      "Jedná se o událost, kdy se proces pokouší přistoupit na adresu spadající do stránky, která není uložena v hlavní paměti."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Který z následujících dějů při běhu procesu v operačním systému je typicky vykonán v režimu jádra?",
+    "options": [
+      "Veškeré zpracování procesu, který je spuštěn uživatelem administrátor (root).",
+      "Zpracování systémového volání.",
+      "Dlouhé čekání procesu na I/O operaci.",
+      "Dlouhé čekání procesu na odpověď ze serveru při síťové komunikaci."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Menší počet výpadků stránek (page fault) zajistíme:",
+    "options": [
+      "Použitím konceptu anonymních stránek.",
+      "Náhodným přesouváním stránek mezi hlavní pamětí a odkládacím prostorem.",
+      "Zvětšením virtuální paměti.",
+      "Zvětšením hlavní paměti (RAM)."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Porty na transportní vrstvě protokolového modelu TCP/IP dělíme do několika kategorií. Jednou z nich jsou známé (privilegované) porty. O těchto portech můžeme říci, že:",
+    "options": [
+      "Označují fyzická síťová rozhraní, jejichž komunikace musí být odbavena přednostně.",
+      "Spadají do rozsahu 0–1023 a jsou rezervovány pro známé služby na straně serveru.",
+      "Jsou to veškeré porty z rozsahu 0–65535, které jsou přiděleny procesům běžícím s oprávněním superuživatele.",
+      "Jsou přidělovány procesům s nejvyšší prioritou na straně klienta."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Předpokládejme typický devítistavový model stavů procesů. Stav procesu nazývaný zombie (živá mrtvola) je:",
+    "options": [
+      "Proces, který vykonal volání jádra pro své ukončení, ale stále o něm existuje záznam v systému.",
+      "Proces, který je potřeba ihned zabít, aby v systému nevznikaly další procesy stejného druhu.",
+      "Proces, který je potřeba ihned oživit, aby v systému nevznikaly další procesy stejného druhu.",
+      "Proces, který běží na pozadí a provádí úkoly bez zásahu člověka."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Co jsou anonymní stránky u virtuální paměti, která je realizována pomocí stránkování?",
+    "options": [
+      "Jsou to stránky v rámci volného prostoru kontextu jádra, který nebyl dosud alokován žádnou datovou strukturou.",
+      "Jsou to stránky v hlavní nebo vedlejší paměti, které zůstaly v paměti po ukončení svého procesu.",
+      "Jsou to stránky v hlavní paměti, které nemají svou kopii v existujícím souboru. Pro odložení takových stránek se používá odkládací oddíl nebo soubor (swap file).",
+      "Jsou to stránky nově vytvořeného procesu potomka s PID=0."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Co je to souběh (race condition) v terminologii synchronizace procesů?",
+    "options": [
+      "Počáteční podmínka běhu každého procesu ve víceúlohovém systému.",
+      "Spuštění více procesů ve stejném okamžiku.",
+      "Situace, kdy dva nebo více procesů nezávisle přistupují ke sdíleným prostředkům a výsledek závisí na pořadí a přesném okamžiku přístupu.",
+      "Počáteční podmínka běhu každého procesu v jednoúlohovém systému."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Vyberte správné tvrzení pro socket jako prostředek síťové komunikace:",
+    "options": [
+      "Zahrnuje adresaci na linkové/spojové vrstvě.",
+      "Zahrnuje adresaci na síťové i transportní vrstvě.",
+      "Zahrnuje pouze první polovinu adresy MAC (12 bitů).",
+      "Zahrnuje adresaci na fyzické vrstvě."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Pojem jádro v operačních systémech definujeme jako:",
+    "options": [
+      "Vše, co je implementováno procesy, které patří uživateli root.",
+      "Vše, co se nachází pod rozhraním systémových volání a nad fyzickými prostředky počítače.",
+      "Vše, co se nachází pod rozhraním uživatelských procesů a nad rozhraním systémových volání.",
+      "Vše, co je implementováno procesy, které jsou spouštěny na požádání."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Které z následujících tvrzení týkajících se hybridního jádra operačního systému je pravdivé?",
+    "options": [
+      "Jedná se o mikrojádro, které mimo nezbytných součástí obsahuje některé další prvky.",
+      "Hybridní jádro se používá výhradně v dávkových systémech.",
+      "Jedná se o monolitické jádro, které bylo zkompilováno pouze pro menší množství funkcí, než je obvyklé.",
+      "Hybridní jádro je pouze teoretickou konstrukcí a nejde jej prakticky realizovat."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Systémové nástroje pro správu operačního systému se podle standardu FHS nachází v adresáři:",
+    "options": [
+      "/bin",
+      "/usr",
+      "/sbin",
+      "/sys"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Data při síťové komunikaci zvaná režie jsou:",
+    "options": [
+      "Data nutná pro zajištění činnosti komunikačních protokolů.",
+      "Data přenášená za účelem zmatení koncového uživatele.",
+      "Data přenášená za účelem zmatení případného útočníka.",
+      "Data, která se v síti nepřenášejí."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Při alokaci paměťového prostoru v hlavní paměti pomocí analýzy frekvence výpadků stránek dochází k následujícímu:",
+    "options": [
+      "S větším počtem paměťových rámců přidělených procesu frekvence výpadků stránek klesá.",
+      "S větším počtem paměťových rámců přidělených procesu frekvence výpadků stránek roste.",
+      "Pokud je frekvence výpadků stránek konstantní, značí to vždy, že proces nepotřebuje více paměti.",
+      "Pokud je frekvence výpadků stránek konstantní, značí to vždy, že proces potřebuje více paměti."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Adresace na transportní vrstvě protokolového modelu TCP/IP je realizována pomocí:",
+    "options": [
+      "Směrovacích tabulek.",
+      "Čísel portů (číslo o velikosti 16 bitů).",
+      "IP adres (pro IPv4 má adresa velikost 32 bitů).",
+      "Adres MAC."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Kolik spojení se sestavuje při komunikaci protokolem TCP?",
+    "options": [
+      "Tři spojení — dvě pro přenos dat a jedno pro přenos signalizace.",
+      "Dvě jednosměrná spojení.",
+      "Čtyři spojení — dvě pro přenos dat a dvě pro přenos signalizace.",
+      "Pět spojení — dvě pro přenos dat, dvě pro signalizaci a třetí pro autentizaci uživatelů."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Uvažme tři procesy: první je ve stavu čekající v hlavní paměti s PID=10, druhý je ve stavu vykonávaný s PID=25 a u třetího s PID=35 nastal výpadek stránky při jeho předešlém vykonávání. Který proces bude vykonáván v následujícím intervalu při preemptivním plánování?",
+    "options": [
+      "Proces s PID=25.",
+      "Proces s PID=35.",
+      "Nelze s jistotou určit.",
+      "Proces s PID=10."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Proces je ve většině operačních systémů jednoznačně identifikován pomocí:",
+    "options": [
+      "Názvu spuštěného programu a dobou běhu procesu v CPU.",
+      "Názvu spuštěného programu.",
+      "Celočíselného identifikátoru PID (Process IDentifier).",
+      "Názvu spuštěného programu a počtem vyvolaných přerušení daným procesem."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Linková/spojová vrstva referenčního modelu OSI zajišťuje:",
+    "options": [
+      "Vytvoření, udržení a rušení spojů mezi zařízeními.",
+      "Synchronizaci portů na straně serveru a klienta.",
+      "Nezávislost transportní vrstvy na funkcích směrování.",
+      "Organizaci toku dat do paketů."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Nulová hodnota frekvence výpadku stránek značí skutečnost, že:",
+    "options": [
+      "Systém má odkládací prostor stejné velikosti jako hlavní paměť.",
+      "Systém má dostatek hlavní paměti (fyzická paměť RAM).",
+      "Systém má dostatečně velký odkládací prostor.",
+      "Systém nemá dostatek hlavní paměti."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Uživatelský kontext procesu se skládá z několika částí. Která část mezi ně NEpatří?",
+    "options": [
+      "Zásobník.",
+      "Programový kód.",
+      "Halda.",
+      "Řídící tabulka procesů PCB (Process Control Block)."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Maximální velikost logického adresového prostoru, který je adresován 32bitovými adresami bez dodatečných rozšíření, je:",
+    "options": [
+      "32 GiB.",
+      "4 GiB.",
+      "4 MiB.",
+      "32 MiB."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Jak můžeme popsat rozdíl mezi uživatelským režimem a režimem jádra?",
+    "options": [
+      "Jakákoliv chyba v uživatelském režimu zastaví chod celého systému.",
+      "V uživatelském režimu běží procesy bez přímého přístupu k hardwaru. V režimu jádra má prováděný kód plný přístup k hardwaru.",
+      "Při startu OS se nejprve aktivují procesy v uživatelském režimu a následně se startuje program jádra.",
+      "V uživatelském režimu běží pouze procesy bez administrátorských oprávnění; v režimu jádra mají procesy plná oprávnění."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Minimálně které vrstvy referenčního modelu OSI musí mít implementován přepínač (switch), který lze vzdáleně spravovat v síti Internet?",
+    "options": [
+      "Fyzickou, linkovou/spojovou a síťovou.",
+      "Fyzickou a linkovou/spojovou.",
+      "Všechny.",
+      "Pouze aplikační."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Jakým způsobem typicky operační systémy označují své procesy?",
+    "options": [
+      "Identifikátorem fyzického umístění v paměti.",
+      "Datem a časem spuštění procesu.",
+      "Celočíselným identifikátorem — PID.",
+      "Procesy operační systémy neoznačují."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Jakou problematiku synchronizace popisuje problém večeřících filosofů?",
+    "options": [
+      "Efektivní využívání výpočetního času procesů, které jsou odložené ve vedlejší paměti.",
+      "Efektivní sdílení společných prostředků.",
+      "Řešení problému obrácených priorit.",
+      "Řešení problému přerušitelnosti atomických instrukcí."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "V jakých systémech zpracování dat je důležitá předvídatelnost?",
+    "options": [
+      "Dávkové a interaktivní.",
+      "Pouze dávkové.",
+      "Real-time.",
+      "Pouze interaktivní."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Které tvrzení o stránkování jako druhu správy paměti operačního systému NENÍ správné?",
+    "options": [
+      "Paměťový obraz procesu je rozdělen na stejně velké úseky.",
+      "O minimální a maximální velikosti stránek rozhoduje každý proces zvlášť.",
+      "Stránky, které proces momentálně nevyužívá, mohou být uloženy ve vedlejší paměti.",
+      "Stránky, které proces aktuálně používá, jsou načteny v hlavní paměti. Podnětem pro načtení stránky je výpadek stránky."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Minimálně které vrstvy referenčního modelu OSI musí mít implementována klasická uživatelská stanice komunikující v síti Internet?",
+    "options": [
+      "Fyzickou, linkovou/spojovou a síťovou (IP vrstva).",
+      "Všechny.",
+      "Fyzickou a linkovou/spojovou.",
+      "Pouze transportní (TCP/UDP)."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Jaké z následujících tvrzení o vláknech a procesech v operačních systémech je pravdivé?",
+    "options": [
+      "Vlákna jsou procesy, které jsou ve stavu živé mrtvoly (zombie).",
+      "Jeden proces může mít jedno nebo více vláken.",
+      "Vlákna jsou procesy ve stavu vykonávaný při čekání na dlouhodobou operaci.",
+      "Vlákna jsou procesy, které běží pouze v kontextu jádra."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Vyberte správné tvrzení o segmentaci jako způsobu správy paměti operačního systému:",
+    "options": [
+      "Různá velikost segmentů minimalizuje fragmentaci fyzické paměti.",
+      "Stejná velikost segmentů je výhodná pro procesy běžící na pozadí.",
+      "Počet výpadků segmentů je typicky větší než počet výpadků stránek u metody stránkování.",
+      "Paměťový obraz procesu je rozdělen na části — segmenty — různé velikosti."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Který typ komunikace mezi procesy je nejrychlejší?",
+    "options": [
+      "Pomocí sdílené paměti.",
+      "Pomocí zasílání zpráv potrubní poštou mezi uživateli systému.",
+      "Pomocí zasílání zpráv mezi více počítači v síti.",
+      "Pomocí zasílání zpráv v rámci jednoho počítače."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Proměnlivá data (například data webového serveru) se podle standardu FHS nachází v adresáři:",
+    "options": [
+      "/var",
+      "/lib",
+      "/bin",
+      "/usr"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Jádro operačního systému Linux lze popsat následovně:",
+    "options": [
+      "Jádro vznikne kompilací procedur, resp. jejich zdrojových kódů, a následným svázáním vzniklých objektových modulů do jednoho spustitelného souboru.",
+      "Jádro je děleno do vrstev a každá vrstva poskytuje abstraktnější virtuální stroj.",
+      "V jádře zůstává pouze nezbytné minimum — správa paměti, multitasking a jednoduchá komunikace mezi procesy.",
+      "Jádro se chová jako virtuální stroj, který nadřazeným vrstvám nabízí několik virtuálních strojů."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Pro systémové programy platí:",
+    "options": [
+      "Zahrnují vše pod rozhraním systémových volání a nad fyzickými prostředky.",
+      "Jedná se o textový a tabulkový procesor a webový prohlížeč.",
+      "Poskytují prostředí pro spuštění a běh aplikačních programů.",
+      "Pracují přímo s hardware systému."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Jaké jsou základní požadavky na synchronizaci procesů?",
+    "options": [
+      "Vyloučení přihlášení více uživatelů do systému v jednom okamžiku.",
+      "Vyloučení spuštění více procesů v jednom okamžiku.",
+      "Vyloučení konfliktu kritických činností a zajištění časové souslednosti ovlivňujících se procesů.",
+      "Vyloučení ukončení více procesů v jednom okamžiku."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Uvažujte synchronizaci procesů. Jaký je problém metody vstupu do kritické sekce pomocí striktního střídání procesů?",
+    "options": [
+      "Porušuje podmínku, že proces nesmí blokovat jiný proces, pokud není v kritické sekci.",
+      "Nezaručuje 100% vyloučení souběhu procesů.",
+      "Nezaručuje provádění instrukcí v atomickém režimu.",
+      "Porušuje podmínku, že proces nesmí blokovat jiný proces, pokud má vyšší prioritu."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Při správě paměti operačního systému pomocí stránkování:",
+    "options": [
+      "Je paměťový obraz procesu rozdělen na různě velké úseky — stránky. Tyto stránky mají větší velikost než rámce v hlavní paměti.",
+      "Je paměťový obraz procesu rozdělen vždy na 32 stránek.",
+      "Je paměťový obraz procesu rozdělen vždy na 64 stránek.",
+      "Je paměťový obraz procesu rozdělen na stejně velké úseky — stránky. Tyto stránky mají stejnou velikost jako rámce v hlavní paměti."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Uvažujme správu paměti pomocí stránkování. Podnětem k výpadku stránky je situace, kdy právě běžící proces vygeneruje adresu spadající do stránky, která se momentálně nachází:",
+    "options": [
+      "V odkládací paměti.",
+      "V hlavní paměti pouze za podmínky, že byla předešle použita.",
+      "V hlavní paměti pouze za podmínky, že byla v minulosti zhusta používána.",
+      "V hlavní paměti pouze za podmínky, že nebyla předešle použita minimálně jeden hodinový takt."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Systémové volání v operačním systému Linux je prováděno v posloupnosti následujících kroků:",
+    "options": [
+      "Uloží se číslo systémového volání; vykoná se instrukce trap; volající program uloží parametry na zásobník; volá se knihovní funkce.",
+      "Volající program uloží parametry na zásobník; volá se knihovní funkce pro systémová volání; uloží se číslo systémového volání na místo, kde jej očekává jádro; vykoná se instrukce trap pro přepnutí do režimu jádra.",
+      "Volá se knihovní funkce; vykoná se instrukce trap; uloží se číslo systémového volání; volající program uloží parametry na zásobník.",
+      "Vykoná se instrukce trap; uloží se číslo systémového volání; volající program uloží parametry na zásobník; volá se knihovní funkce."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Vyberte protokoly aplikační vrstvy protokolového modelu TCP/IP:",
+    "options": [
+      "IP a ICMP.",
+      "Ethernet.",
+      "SSH, FTP, HTTP, TELNET, TFTP.",
+      "UDP a TCP."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Mezi typické základní stavy běhu procesu v operačním systému patří:",
+    "options": [
+      "Nový, připravený ke zpracování, běžící, čekající, ukončený.",
+      "Starý, mladý, režim nízkého PID, režim vysokého PID.",
+      "Krátkodobý a dlouhodobý.",
+      "Nezadaný, ženatý, rozvedený, vdovec."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Který z následujících základních parametrů z hlediska plánování algoritmů NENÍ sledován v dávkovém systému?",
+    "options": [
+      "Rychlost obsloužení.",
+      "Využití CPU.",
+      "Propustnost sběrnice.",
+      "Výkonnost (počet zpracovaných úloh za jednotku času)."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Proces je ve stavu „vykonávaný v režimu jádra“ a vyžaduje diskový I/O, při kterém musí čekat na jeho dokončení. První stav, do kterého proces přejde, je:",
+    "options": [
+      "Zablokován a uložen v hlavní paměti (asleep in memory).",
+      "Vykonávaný ve stavu živé mrtvoly (zombie).",
+      "Nuceně přerušený (preempted).",
+      "Zablokován a uložen v odkládací paměti (sleep, swapped)."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Jaké typické nebezpečí hrozí v případě používání sdílené paměti jako prostředku meziprocesové komunikace?",
+    "options": [
+      "Automatické snižování priority procesů, které nekomunikují.",
+      "Automatické snižování priority procesů, které komunikují.",
+      "Automatické zvyšování priority procesů, které patří uživateli žádajícímu o komunikaci.",
+      "Nekonzistence dat."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Vyberte CHYBNÝ popis speciálních souborů, které se používají pro přístup k zařízením připojeným do systému:",
+    "options": [
+      "Speciální soubory přinášejí velkou míru abstrakce, protože se zařízeními lze pracovat pomocí univerzálních funkcí zápisu a čtení.",
+      "Speciální soubory mohou reprezentovat i softwarová zařízení.",
+      "Speciální soubory nelze použít pro bloková zařízení.",
+      "Speciální soubory může operační systém vytvářet automaticky podle stavu připojených zařízení."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Paket je jednotkou bloku dat které vrstvy referenčního modelu OSI?",
+    "options": [
+      "Transportní.",
+      "Síťové.",
+      "Linkové/spojové.",
+      "Fyzické."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Sekundární hierarchie adresářů vztažená k uživatelům operačního systému se podle standardu FHS nachází v adresáři:",
+    "options": [
+      "/etc",
+      "/usr",
+      "/lib",
+      "/var"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Minimálně které vrstvy referenčního modelu OSI musí mít implementován směrovač (router), který lze vzdáleně spravovat v síti Internet?",
+    "options": [
+      "Pouze aplikační.",
+      "Všechny.",
+      "Fyzickou, linkovou/spojovou a síťovou.",
+      "Fyzickou a linkovou/spojovou."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Příznak v segmentu TCP zvaný SYN značí, že se jedná o:",
+    "options": [
+      "Segment nesoucí žádost o navázání spojení.",
+      "Segment potvrzující ukončení spojení.",
+      "Segment potvrzující přijatou žádost o navázání spojení.",
+      "Segment ukončující spojení."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Najdi chybu: Správa paměti operačního systému pomocí stránkování:",
+    "options": [
+      "Je pro procesy plně transparentní děj.",
+      "Fyzická paměť je rozdělena na stejně velké rámce (frames).",
+      "Zaručuje souvislé umístění dat procesu v hlavní paměti, které logicky patří k sobě.",
+      "Adresní prostor tvoří stránky stejné velikosti."
+    ],
+    "correct": 2
+  }
+];
 
 let answered = 0;
 let correct = 0;
@@ -494,9 +1704,9 @@ function buildQuiz() {
     const card = document.createElement('div');
     card.className = 'question-card';
     card.id = `card-${qi}`;
-    card.style.animationDelay = `${qi * 0.03}s`;
+    card.style.animationDelay = `${Math.min(qi * 0.012, 0.35)}s`;
 
-    const optionsHtml = q.options.map((opt, oi) => `
+    let optionsHtml = q.options.map((opt, oi) => `
       <button class="option" onclick="selectOption(${qi}, ${oi})" id="opt-${qi}-${oi}">
         <span class="option-letter">${letters[oi]})</span>
         <span class="option-text">${opt}</span>
@@ -529,6 +1739,7 @@ function selectOption(qi, oi) {
   const card = document.getElementById(`card-${qi}`);
   card.classList.add('answered');
 
+  // Disable all options for this question
   for (let i = 0; i < q.options.length; i++) {
     const btn = document.getElementById(`opt-${qi}-${i}`);
     btn.disabled = true;
@@ -564,17 +1775,17 @@ function updateScoreBar() {
   document.getElementById('score-wrong').textContent = wrong;
   document.getElementById('score-total').textContent = questions.length;
 
-  const pct = questions.length ? Math.round((answered / questions.length) * 100) : 0;
-  document.getElementById('progress-fill').style.width = `${pct}%`;
+  const pct = Math.round((answered / questions.length) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
   document.getElementById('progress-label').textContent = `${answered} / ${questions.length} zodpovězeno`;
 }
 
 function showResults() {
-  const pct = questions.length ? Math.round((correct / questions.length) * 100) : 0;
+  const pct = Math.round((correct / questions.length) * 100);
   const emoji = pct >= 90 ? '🏆' : pct >= 70 ? '🎉' : pct >= 50 ? '📚' : '💪';
 
   document.getElementById('result-emoji').textContent = emoji;
-  document.getElementById('result-pct').textContent = `${pct}%`;
+  document.getElementById('result-pct').textContent = pct + '%';
   document.getElementById('result-sub').textContent = `${correct} z ${questions.length} správně`;
   document.getElementById('rb-correct').textContent = correct;
   document.getElementById('rb-wrong').textContent = wrong;
